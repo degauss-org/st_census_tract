@@ -1,0 +1,7 @@
+# ignore everything
+**
+
+# except what we need
+!/renv.lock
+!/entrypoint.R
+!/census_tracts_1970_to_2020.rds
