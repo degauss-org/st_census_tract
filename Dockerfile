@@ -20,7 +20,7 @@ RUN apt-get update \
 COPY renv.lock .
 RUN R --quiet -e "renv::restore(repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
 
-COPY census_tracts_1970_to_2020.rds .
+ADD https://geomarker.s3.us-east-2.amazonaws.com/geometries/census_tracts_1970_to_2020.rds census_tracts_1970_to_2020.rds
 COPY entrypoint.R .
 
 WORKDIR /tmp
