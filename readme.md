@@ -1,5 +1,5 @@
 
-# st_census_tract <a href='https://degauss-org.github.io/DeGAUSS/'><img src='https://github.com/degauss-org/degauss_template/blob/master/DeGAUSS_hex.png' align='right' height='138.5' /></a>
+# st_census_tract <a href='https://degauss.org'><img src='https://github.com/degauss-org/degauss_template/raw/master/DeGAUSS_hex.png' align='right' height='138.5' /></a>
 
 > link geocoded coordinates with date ranges to cooresponding census tracts from the appropriate vintage
 
