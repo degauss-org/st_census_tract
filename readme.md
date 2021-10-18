@@ -1,5 +1,5 @@
 
-# st_census_tract <a href='https://degauss-org.github.io/DeGAUSS/'><img src='https://github.com/degauss-org/degauss_template/blob/master/DeGAUSS_hex.png' align='right' height='138.5' /></a>
+# st_census_tract <a href='https://degauss.org'><img src='https://github.com/degauss-org/degauss_template/raw/master/DeGAUSS_hex.png' align='right' height='138.5' /></a>
 
 > link geocoded coordinates with date ranges to cooresponding census tracts from the appropriate vintage
 
@@ -12,10 +12,10 @@
 If `my_address_file_geocoded.csv` is a file in the current working directory with coordinate columns named `lat`, `lon`, `start_date`, and `end_date`, then
 
 ```sh
-docker run --rm -v $PWD:/tmp degauss/st_census_tract:0.0.2 my_address_file_geocoded.csv
+docker run --rm -v $PWD:/tmp degauss/st_census_tract:0.0.3 my_address_file_geocoded.csv
 ```
 
-will produce `my_address_file_geocoded_st_census_tract_v0.0.2.csv` with an added columns named `census_tract_vintage` and `census_tract_id`. 
+will produce `my_address_file_geocoded_st_census_tract_v0.0.3.csv` with an added columns named `census_tract_vintage` and `census_tract_id`. 
 
 
 ## geomarker methods

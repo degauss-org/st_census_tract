@@ -1,7 +1,7 @@
 #!/usr/local/bin/Rscript
 
 dht::greeting(geomarker_name = 'Spatiotemporal Census Tract', 
-              version = '0.0.2', 
+              version = '0.0.3', 
               description = 'links geocoded coordinates with date ranges to cooresponding census tracts from the appropriate vintage')
 
 old_warn <- getOption("warn")
@@ -90,4 +90,4 @@ dht::write_geomarker_file(d = d,
                           raw_data = raw_data %>% select(-start_date, -end_date),
                           filename = opt$filename,
                           geomarker_name = 'st_census_tract',
-                          version = '0.0.2')
+                          version = '0.0.3')

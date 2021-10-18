@@ -10,7 +10,7 @@ editor_options:
 ```{r prep, eval = FALSE, echo = FALSE}
 # use these variables along with the find/replace function to update globally
 geomarker <- basename(here::here())
-container_version <- 0.0.2
+container_version <- 0.0.3
 r_version <- dht::detect_r_version()
 renv_version <- packageVersion("renv")
 ```
@@ -50,7 +50,7 @@ ENTRYPOINT ["/app/entrypoint.R"]
 #!/usr/local/bin/Rscript
 
 dht::greeting(geomarker_name = 'Spatiotemporal Census Tract', 
-              version = '0.0.2', 
+              version = '0.0.3', 
               description = 'links geocoded coordinates with date ranges to cooresponding census tracts from the appropriate vintage')
 
 old_warn <- getOption("warn")
@@ -139,7 +139,7 @@ dht::write_geomarker_file(d = d,
                           raw_data = raw_data %>% select(-start_date, -end_date),
                           filename = opt$filename,
                           geomarker_name = 'st_census_tract',
-                          version = '0.0.2')
+                          version = '0.0.3')
 ```
 
 ```{text dockerignore, eval = FALSE, echo = FALSE}
@@ -149,7 +149,6 @@ dht::write_geomarker_file(d = d,
 # except what we need
 !/renv.lock
 !/entrypoint.R
-!/census_tracts_1970_to_2020.rds
 ```
 
 ```{text gitignore, eval = FALSE, echo = FALSE}
@@ -176,6 +175,7 @@ IMAGE=$(REGISTRY_HOST)/$(USERNAME)/$(NAME)
 .PHONY: build test shell release clean tag-gh
 
 build:
+  R -e "dht::inflate()"
 	docker build -t $(IMAGE) .
 
 test:
@@ -317,7 +317,8 @@ jobs:
           docker push ${{ env.container }}
 ```
 
-# st_census_tract <a href='https://degauss-org.github.io/DeGAUSS/'><img src='https://github.com/degauss-org/degauss_template/blob/master/DeGAUSS_hex.png' align='right' height='138.5' /></a>
+# st_census_tract <a href='https://degauss.org'><img src='https://github.com/degauss-org/degauss_template/raw/master/DeGAUSS_hex.png' align='right' height='138.5' /></a>
+
 
 > link geocoded coordinates with date ranges to cooresponding census tracts from the appropriate vintage
 
@@ -329,10 +330,10 @@ jobs:
 If `my_address_file_geocoded.csv` is a file in the current working directory with coordinate columns named `lat`, `lon`, `start_date`, and `end_date`, then
 
 ```sh
-docker run --rm -v $PWD:/tmp degauss/st_census_tract:0.0.2 my_address_file_geocoded.csv
+docker run --rm -v $PWD:/tmp degauss/st_census_tract:0.0.3 my_address_file_geocoded.csv
 ```
 
-will produce `my_address_file_geocoded_st_census_tract_v0.0.2.csv` with an added columns named `census_tract_vintage` and `census_tract_id`. 
+will produce `my_address_file_geocoded_st_census_tract_v0.0.3.csv` with an added columns named `census_tract_vintage` and `census_tract_id`. 
 
 ## geomarker methods
 
