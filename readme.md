@@ -1,7 +1,7 @@
 
 # st_census_tract <a href='https://degauss.org'><img src='https://github.com/degauss-org/degauss_template/raw/master/DeGAUSS_hex.png' align='right' height='138.5' /></a>
 
-> link geocoded coordinates with date ranges to corresponding census tracts from the appropriate census geography vintage
+> link geocoded coordinates with date ranges to cooresponding census tracts from the appropriate vintage
 
 [![Docker Build Status](https://img.shields.io/docker/automated/degauss/st_census_tract)](https://hub.docker.com/repository/docker/degauss/st_census_tract/tags)
 [![GitHub Latest Tag](https://img.shields.io/github/v/tag/degauss-org/st_census_tract)](https://github.com/degauss-org/st_census_tract/releases)

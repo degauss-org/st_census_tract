@@ -1,6 +1,6 @@
 #!/usr/local/bin/Rscript
 
-dht::greeting(geomarker_name = 'Spatiotemporal Census Tract', 
+dht::greeting(geomarker_name = 'st_census_tract', 
               version = '0.0.3', 
               description = 'links geocoded coordinates with date ranges to cooresponding census tracts from the appropriate vintage')
 
