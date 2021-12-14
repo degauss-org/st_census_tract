@@ -1,7 +1,7 @@
 #!/usr/local/bin/Rscript
 
 dht::greeting(geomarker_name = 'st_census_tract', 
-              version = '0.0.3', 
+              version = '0.0.4', 
               description = 'links geocoded coordinates with date ranges to cooresponding census tracts from the appropriate vintage')
 
 old_warn <- getOption("warn")
@@ -50,6 +50,7 @@ d <- d %>%
 cli::cli_alert_warning('{nrow(d %>% filter(start_year != end_year) )} date range{?s} span{?s/} more than one census decade and will be split to one row per decade.')
 
 d_splits <- d %>% 
+  group_by(.row) %>%  
   filter(start_year != end_year) %>% 
   mutate(new_dates = list(data.frame(new_start_date = c(start_date, 
                                                         glue::glue("{lubridate::year(end_date)}-01-01")), 
@@ -90,4 +91,4 @@ dht::write_geomarker_file(d = d,
                           raw_data = raw_data %>% select(-start_date, -end_date),
                           filename = opt$filename,
                           geomarker_name = 'st_census_tract',
-                          version = '0.0.3')
+                          version = '0.0.4')
