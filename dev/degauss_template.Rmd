@@ -126,7 +126,7 @@ all_tracts <- readRDS('/app/census_tracts_1970_to_2020.rds')
 tracts_to_join <- all_tracts[names(all_tracts) == names(d)]
 
 message('joining to census tracts...')
-d <- purrr::map2(d, tracts_to_join, st_join) %>% 
+d <- purrr::map2(d, tracts_to_join, ~suppressWarnings(st_join(.x, .y, largest = TRUE))) %>% 
   bind_rows() %>% 
   st_drop_geometry()
 
