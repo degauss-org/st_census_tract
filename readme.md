@@ -12,10 +12,10 @@
 If `my_address_file_geocoded.csv` is a file in the current working directory with coordinate columns named `lat`, `lon`, `start_date`, and `end_date`, then
 
 ```sh
-docker run --rm -v $PWD:/tmp degauss/st_census_tract:0.1.0 my_address_file_geocoded.csv
+docker run --rm -v $PWD:/tmp degauss/st_census_tract:0.1.1 my_address_file_geocoded.csv
 ```
 
-will produce `my_address_file_geocoded_st_census_tract_v0.1.0.csv` with an added columns named `census_tract_vintage` and `census_tract_id`. 
+will produce `my_address_file_geocoded_st_census_tract_v0.1.1.csv` with an added columns named `census_tract_vintage` and `census_tract_id`. 
 
 
 ## geomarker methods
