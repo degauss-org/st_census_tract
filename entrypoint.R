@@ -1,7 +1,7 @@
 #!/usr/local/bin/Rscript
 
 dht::greeting(geomarker_name = 'st_census_tract', 
-              version = '0.1.1', 
+              version = '0.1.2', 
               description = 'links geocoded coordinates with date ranges to cooresponding census tracts from the appropriate vintage')
 
 old_warn <- getOption("warn")
@@ -72,7 +72,7 @@ d <- d %>%
   split(f = d$census_tract_vintage)
 
 message('loading census tract shapefiles...')
-all_tracts <- readRDS('/app/census_tracts_1970_to_2020.rds')
+all_tracts <- readRDS('/app/census_tracts_1970_to_2020_valid.rds')
 
 tracts_to_join <- all_tracts[names(all_tracts) == names(d)]
 
@@ -86,4 +86,4 @@ dht::write_geomarker_file(d = d,
                           raw_data = raw_data %>% select(-start_date, -end_date),
                           filename = opt$filename,
                           geomarker_name = 'st_census_tract',
-                          version = '0.1.1')
+                          version = '0.1.2')

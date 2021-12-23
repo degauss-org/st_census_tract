@@ -26,3 +26,15 @@ all_tracts <- split(all_tracts, f = all_tracts$census_tract_vintage)
 all_tracts <- map(all_tracts, ~dplyr::select(.x, -census_tract_vintage))
 
 saveRDS(all_tracts, 'census_tracts_1970_to_2020.rds')
+
+### fix for st_make_valid
+
+all_tracts <- s3::s3_get('s3://geomarker/geometries/census_tracts_1970_to_2020.rds') %>%
+  readRDS()
+
+all_tracts <- purrr::map(all_tracts, st_make_valid)
+check <- purrr::map(all_tracts, st_is_valid)
+purrr::map(check, ~!any(.x))
+
+saveRDS(all_tracts, 'census_tracts_1970_to_2020_valid.rds')
+

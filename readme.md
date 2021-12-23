@@ -12,10 +12,10 @@
 If `my_address_file_geocoded.csv` is a file in the current working directory with coordinate columns named `lat`, `lon`, `start_date`, and `end_date`, then
 
 ```sh
-docker run --rm -v $PWD:/tmp degauss/st_census_tract:0.1.1 my_address_file_geocoded.csv
+docker run --rm -v $PWD:/tmp degauss/st_census_tract:0.1.2 my_address_file_geocoded.csv
 ```
 
-will produce `my_address_file_geocoded_st_census_tract_v0.1.1.csv` with an added columns named `census_tract_vintage` and `census_tract_id`. 
+will produce `my_address_file_geocoded_st_census_tract_v0.1.2.csv` with an added columns named `census_tract_vintage` and `census_tract_id`. 
 
 
 ## geomarker methods
@@ -43,7 +43,7 @@ where a 2019 tract identifier is assigned to the first row, and a 2020 tract ide
 ## geomarker data
 
 - census tract boundaries were obtained from [NHGIS](https://www.nhgis.org/) and transformed to crs 5072
-- census tract boundaries used in this container are stored at [`s3://geomarker/geometries/census_tracts_1970_to_2020.rds`](https://geomarker.s3.us-east-2.amazonaws.com/geometries/census_tracts_1970_to_2020.rds)
+- census tract boundaries used in this container are stored at [`s3://geomarker/geometries/census_tracts_1970_to_2020_valid.rds`](https://geomarker.s3.us-east-2.amazonaws.com/geometries/census_tracts_1970_to_2020_valid.rds)
 
 
 ## DeGAUSS details

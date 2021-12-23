@@ -10,7 +10,7 @@ editor_options:
 ```{r prep, eval = FALSE, echo = FALSE}
 # use these variables along with the find/replace function to update globally
 geomarker <- basename(here::here())
-container_version <- 0.1.1
+container_version <- 0.1.2
 r_version <- dht::detect_r_version()
 renv_version <- packageVersion("renv")
 ```
@@ -38,7 +38,7 @@ RUN apt-get update \
 COPY renv.lock .
 RUN R --quiet -e "renv::restore(repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
 
-ADD https://geomarker.s3.us-east-2.amazonaws.com/geometries/census_tracts_1970_to_2020.rds census_tracts_1970_to_2020.rds
+ADD https://geomarker.s3.us-east-2.amazonaws.com/geometries/census_tracts_1970_to_2020_valid.rds census_tracts_1970_to_2020_valid.rds
 COPY entrypoint.R .
 
 WORKDIR /tmp
@@ -50,7 +50,7 @@ ENTRYPOINT ["/app/entrypoint.R"]
 #!/usr/local/bin/Rscript
 
 dht::greeting(geomarker_name = 'st_census_tract', 
-              version = '0.1.1', 
+              version = '0.1.2', 
               description = 'links geocoded coordinates with date ranges to cooresponding census tracts from the appropriate vintage')
 
 old_warn <- getOption("warn")
@@ -121,7 +121,7 @@ d <- d %>%
   split(f = d$census_tract_vintage)
 
 message('loading census tract shapefiles...')
-all_tracts <- readRDS('/app/census_tracts_1970_to_2020.rds')
+all_tracts <- readRDS('/app/census_tracts_1970_to_2020_valid.rds')
 
 tracts_to_join <- all_tracts[names(all_tracts) == names(d)]
 
@@ -135,7 +135,7 @@ dht::write_geomarker_file(d = d,
                           raw_data = raw_data %>% select(-start_date, -end_date),
                           filename = opt$filename,
                           geomarker_name = 'st_census_tract',
-                          version = '0.1.1')
+                          version = '0.1.2')
 ```
 
 ```{text dockerignore, eval = FALSE, echo = FALSE}
@@ -325,10 +325,10 @@ jobs:
 If `my_address_file_geocoded.csv` is a file in the current working directory with coordinate columns named `lat`, `lon`, `start_date`, and `end_date`, then
 
 ```sh
-docker run --rm -v $PWD:/tmp degauss/st_census_tract:0.1.1 my_address_file_geocoded.csv
+docker run --rm -v $PWD:/tmp degauss/st_census_tract:0.1.2 my_address_file_geocoded.csv
 ```
 
-will produce `my_address_file_geocoded_st_census_tract_v0.1.1.csv` with an added columns named `census_tract_vintage` and `census_tract_id`. 
+will produce `my_address_file_geocoded_st_census_tract_v0.1.2.csv` with an added columns named `census_tract_vintage` and `census_tract_id`. 
 
 ## geomarker methods
 
@@ -354,7 +354,7 @@ where a 2019 tract identifier is assigned to the first row, and a 2020 tract ide
 ## geomarker data
 
 - census tract boundaries were obtained from [NHGIS](https://www.nhgis.org/) and transformed to crs 5072
-- census tract boundaries used in this container are stored at [`s3://geomarker/geometries/census_tracts_1970_to_2020.rds`](https://geomarker.s3.us-east-2.amazonaws.com/geometries/census_tracts_1970_to_2020.rds)
+- census tract boundaries used in this container are stored at [`s3://geomarker/geometries/census_tracts_1970_to_2020_valid.rds`](https://geomarker.s3.us-east-2.amazonaws.com/geometries/census_tracts_1970_to_2020_valid.rds)
 
 ## DeGAUSS details
 
