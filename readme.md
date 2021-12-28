@@ -1,22 +1,17 @@
-
 # st_census_tract <a href='https://degauss.org'><img src='https://github.com/degauss-org/degauss_template/raw/master/DeGAUSS_hex.png' align='right' height='138.5' /></a>
 
 > link geocoded coordinates with date ranges to cooresponding census tracts from the appropriate vintage
-
-[![Docker Build Status](https://img.shields.io/docker/automated/degauss/st_census_tract)](https://hub.docker.com/repository/docker/degauss/st_census_tract/tags)
-[![GitHub Latest Tag](https://img.shields.io/github/v/tag/degauss-org/st_census_tract)](https://github.com/degauss-org/st_census_tract/releases)
-
+[![](https://img.shields.io/github/v/tag/degauss-org/st_census_tract)](https://github.com/degauss-org/st_census_tract/releases)
 
 ## DeGAUSS example call
 
-If `my_address_file_geocoded.csv` is a file in the current working directory with coordinate columns named `lat`, `lon`, `start_date`, and `end_date`, then
+If `my_address_file_geocoded.csv` is a file in the current working directory with coordinate columns named `lat` and `lon`, then
 
 ```sh
-docker run --rm -v $PWD:/tmp degauss/st_census_tract:0.1.2 my_address_file_geocoded.csv
+docker run --rm -v $PWD:/tmp ghcr.io/degauss-org/st_census_tract:0.1.2 my_address_file_geocoded.csv
 ```
 
-will produce `my_address_file_geocoded_st_census_tract_v0.1.2.csv` with an added columns named `census_tract_vintage` and `census_tract_id`. 
-
+will produce `my_address_file_geocoded_st_census_tract_v0.1.2.csv` with added columns named `census_tract_vintage` and `census_tract_id`. 
 
 ## geomarker methods
 
@@ -39,15 +34,11 @@ would become
 
 where a 2019 tract identifier is assigned to the first row, and a 2020 tract identifier is assigned to the second row.
 
-
 ## geomarker data
 
 - census tract boundaries were obtained from [NHGIS](https://www.nhgis.org/) and transformed to crs 5072
 - census tract boundaries used in this container are stored at [`s3://geomarker/geometries/census_tracts_1970_to_2020_valid.rds`](https://geomarker.s3.us-east-2.amazonaws.com/geometries/census_tracts_1970_to_2020_valid.rds)
 
-
 ## DeGAUSS details
 
 For detailed documentation on DeGAUSS, including general usage and installation, please see the [DeGAUSS homepage](https://degauss.org).
-
-
