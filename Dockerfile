@@ -1,8 +1,8 @@
 FROM rocker/r-ver:4.0.4
 
 ENV degauss_name="st_census_tract"
-ENV degauss_version="0.1.0"
-ENV degauss_description="insert short description here that finishes the sentence `This container ...`"
+ENV degauss_version="0.1.2"
+ENV degauss_description="links geocoded coordinates with date ranges to cooresponding census tracts from the appropriate vintage"
 
 # add labels based on environment variables too
 LABEL "org.degauss.name"="${degauss_name}"
