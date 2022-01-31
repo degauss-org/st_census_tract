@@ -1,13 +1,15 @@
 FROM rocker/r-ver:4.0.4
 
+# DeGAUSS container metadata
 ENV degauss_name="st_census_tract"
 ENV degauss_version="0.1.2"
-ENV degauss_description="links geocoded coordinates with date ranges to cooresponding census tracts from the appropriate vintage"
+ENV degauss_description="spatiotemporal census tract 1970 - 2020"
 
-# add labels based on environment variables too
+# add OCI labels based on environment variables too
 LABEL "org.degauss.name"="${degauss_name}"
 LABEL "org.degauss.version"="${degauss_version}"
 LABEL "org.degauss.description"="${degauss_description}"
+LABEL "org.degauss.argument"="${degauss_argument}"
 
 RUN R --quiet -e "install.packages('remotes', repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
 
