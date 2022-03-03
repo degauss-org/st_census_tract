@@ -1,30 +1,26 @@
 #!/usr/local/bin/Rscript
 
-dht::greeting(geomarker_name = 'st_census_tract',
-              version = '0.1.3',
-              description = 'links geocoded coordinates with date ranges to cooresponding census tracts from the appropriate vintage')
+dht::greeting()
+
+## load libraries without messages or warnings
+withr::with_message_sink("/dev/null", library(dplyr))
+withr::with_message_sink("/dev/null", library(tidyr))
+withr::with_message_sink("/dev/null", library(sf))
 
 old_warn <- getOption("warn")
 options(warn = -1)
 
-library(dht)
-qlibrary(readr)
-qlibrary(dplyr)
-qlibrary(tidyr)
-qlibrary(sf)
-
-options(warn = old_warn)
-
-doc <- '
+doc <- "
       Usage:
       entrypoint.R <filename>
-      '
+      "
 
 opt <- docopt::docopt(doc)
+
 ## for interactive testing
 ## opt <- docopt::docopt(doc, args = 'test/my_address_file_geocoded.csv')
 
-message('reading input file...')
+message("reading input file...")
 raw_data <- readr::read_csv(opt$filename)
 
 dht::check_for_column(raw_data, 'lat', raw_data$lat)
@@ -41,6 +37,8 @@ d <-
   raw_data %>%
   select(.row, lat, lon, start_date, end_date) %>%
   na.omit()
+
+## add code here to calculate geomarkers
 
 message('determining census decade for each date range...')
 d <- d %>%
@@ -84,6 +82,4 @@ d <- purrr::map2(d, tracts_to_join, ~suppressWarnings(st_join(.x, .y, largest = 
 ## merge back on .row after unnesting .rows into .row
 dht::write_geomarker_file(d = d,
                           raw_data = raw_data %>% select(-start_date, -end_date),
-                          filename = opt$filename,
-                          geomarker_name = 'st_census_tract',
-                          version = '0.1.3')
+                          filename = opt$filename)

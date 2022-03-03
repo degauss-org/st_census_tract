@@ -1,9 +1,10 @@
-FROM rocker/r-ver:4.0.4
+FROM rocker/r-ver:4.0.5
 
 # DeGAUSS container metadata
 ENV degauss_name="st_census_tract"
-ENV degauss_version="0.1.3"
-ENV degauss_description="spatiotemporal census tract 1970 - 2020"
+ENV degauss_version="0.2.0"
+ENV degauss_description="census tract identifiers with appropriate vintage"
+# ENV degauss_argument="short description of optional argument [default: 'insert_default_value_here']"
 
 # add OCI labels based on environment variables too
 LABEL "org.degauss.name"="${degauss_name}"
@@ -13,7 +14,7 @@ LABEL "org.degauss.argument"="${degauss_argument}"
 
 RUN R --quiet -e "install.packages('remotes', repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
 
-RUN R --quiet -e "remotes::install_github('rstudio/renv@0.14.0')"
+RUN R --quiet -e "remotes::install_github('rstudio/renv@0.15.3')"
 
 WORKDIR /app
 
