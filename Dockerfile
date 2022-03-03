@@ -2,7 +2,7 @@ FROM rocker/r-ver:4.0.4
 
 # DeGAUSS container metadata
 ENV degauss_name="st_census_tract"
-ENV degauss_version="0.1.2"
+ENV degauss_version="0.1.3"
 ENV degauss_description="spatiotemporal census tract 1970 - 2020"
 
 # add OCI labels based on environment variables too
