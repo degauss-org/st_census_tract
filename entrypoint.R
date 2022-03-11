@@ -7,9 +7,6 @@ withr::with_message_sink("/dev/null", library(dplyr))
 withr::with_message_sink("/dev/null", library(tidyr))
 withr::with_message_sink("/dev/null", library(sf))
 
-old_warn <- getOption("warn")
-options(warn = -1)
-
 doc <- "
       Usage:
       entrypoint.R <filename>
@@ -21,7 +18,7 @@ opt <- docopt::docopt(doc)
 ## opt <- docopt::docopt(doc, args = 'test/my_address_file_geocoded.csv')
 
 message("reading input file...")
-raw_data <- readr::read_csv(opt$filename)
+raw_data <- dht::read_lat_lon_csv(opt$filename)
 
 dht::check_for_column(raw_data, 'lat', raw_data$lat)
 dht::check_for_column(raw_data, 'lon', raw_data$lon)
