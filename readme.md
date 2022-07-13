@@ -16,6 +16,8 @@ will produce `my_address_file_geocoded_st_census_tract_0.2.0.csv` with added col
 - **`census_tract_vintage`**: decennial census year 
 - **`census_tract_id`**: census tract FIPS identifier 
 
+*Note that some tract identifiers before 2000 are only 4 digits, instead of 6, resulting in 9-digit `census_tract_id`s.*
+
 ## Geomarker Methods
 
 Input data must have columns called `lat` and `lon` containing the latitude and longitude, respecitvely, as well as `start_date` and `end_date` specifying a date range over which tract-level geomarkers will be assessed. The date range will be used to assign a census tract vintage, ranging from 1970 to 2020 by decade. If you do not have temporal data and wish to use the 2010 tract or block group boundaries, you can utilize the [census_block_group](https://degauss.org/census_block_group) DeGAUSS container. 

@@ -2,7 +2,7 @@ FROM rocker/r-ver:4.0.5
 
 # DeGAUSS container metadata
 ENV degauss_name="st_census_tract"
-ENV degauss_version="0.2.0"
+ENV degauss_version="0.2.1"
 ENV degauss_description="census tract identifiers with appropriate vintage"
 # ENV degauss_argument="short description of optional argument [default: 'insert_default_value_here']"
 
