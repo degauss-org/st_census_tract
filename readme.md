@@ -8,15 +8,15 @@
 If `my_address_file_geocoded.csv` is a file in the current working directory with coordinate columns named `lat` and `lon`, then the [DeGAUSS command](https://degauss.org/using_degauss.html#DeGAUSS_Commands):
 
 ```sh
-docker run --rm -v $PWD:/tmp ghcr.io/degauss-org/st_census_tract:0.2.0 my_address_file_geocoded.csv
+docker run --rm -v $PWD:/tmp ghcr.io/degauss-org/st_census_tract:0.2.1 my_address_file_geocoded.csv
 ```
 
-will produce `my_address_file_geocoded_st_census_tract_0.2.0.csv` with added columns:
+will produce `my_address_file_geocoded_st_census_tract_0.2.1.csv` with added columns:
 
 - **`census_tract_vintage`**: decennial census year 
 - **`census_tract_id`**: census tract FIPS identifier 
 
-*Note that some tract identifiers before 2000 are only 4 digits, instead of 6, resulting in 9-digit `census_tract_id`s.*
+*Block Group identifiers are defined as the concatenation of the state, county, tract, and block group fips identifiers (commonly called GISJOIN or GEOID in census data). All census tract identifiers are 11 digits and all census block group identifiers are 12 digits, with the exception of some 1990, 1980, and 1970 tracts that are 9 digits, resulting in 10 digit block group identifiers.*
 
 ## Geomarker Methods
 
