@@ -11,13 +11,10 @@ all_tracts <- map(
 
 all_tracts <- map2(all_tracts, year, ~.x %>% mutate(census_tract_vintage = .y))
 
-## stopped
-
 all_tracts[[1]] <- all_tracts[[1]] %>%
   mutate(state_fips = stringr::str_sub(NHGISST, 1, 2),
          county_fips = stringr::str_sub(NHGISCTY, 1, 3),
          tract_fips = stringr::str_sub(GISJOIN2, 8, -1),
-         tract_fips = stringr::str_pad(tract_fips, 6, pad = "0"),
          census_tract_id = glue::glue('{state_fips}{county_fips}{tract_fips}')) %>%
   select(census_tract_vintage, census_tract_id)
 
@@ -25,7 +22,6 @@ all_tracts[[2]] <- all_tracts[[2]] %>%
   mutate(state_fips = stringr::str_sub(NHGISST, 1, 2),
          county_fips = stringr::str_sub(NHGISCTY, 1, 3),
          tract_fips = stringr::str_sub(GISJOIN2, 8, -1),
-         tract_fips = stringr::str_pad(tract_fips, 6, pad = "0"),
          census_tract_id = glue::glue('{state_fips}{county_fips}{tract_fips}')) %>%
   select(census_tract_vintage, census_tract_id)
 
@@ -33,7 +29,6 @@ all_tracts[[3]] <- all_tracts[[3]] %>%
   mutate(state_fips = stringr::str_sub(NHGISST, 1, 2),
          county_fips = stringr::str_sub(NHGISCTY, 1, 3),
          tract_fips = stringr::str_sub(GISJOIN2, 8, -1),
-         tract_fips = stringr::str_pad(tract_fips, 6, pad = "0"),
          census_tract_id = glue::glue('{state_fips}{county_fips}{tract_fips}')) %>%
   select(census_tract_vintage, census_tract_id)
 
@@ -41,7 +36,6 @@ all_tracts[[4]] <- all_tracts[[4]] %>%
   mutate(state_fips = stringr::str_sub(NHGISST, 1, 2),
          county_fips = stringr::str_sub(NHGISCTY, 1, 3),
          tract_fips = stringr::str_sub(GISJOIN2, 8, -1),
-         tract_fips = stringr::str_pad(tract_fips, 6, pad = "0"),
          census_tract_id = glue::glue('{state_fips}{county_fips}{tract_fips}')) %>%
   select(census_tract_vintage, census_tract_id)
 
