@@ -5,7 +5,7 @@
 
 ## Using
 
-If `my_address_file_geocoded.csv` is a file in the current working directory with coordinate columns named `lat` and `lon`, then the [DeGAUSS command](https://degauss.org/using_degauss.html#DeGAUSS_Commands):
+If `my_address_file_geocoded.csv` is a file in the current working directory with coordinate columns named `lat`, `lon`, `start_date`, and `end_date`, then the [DeGAUSS command](https://degauss.org/using_degauss.html#DeGAUSS_Commands):
 
 ```sh
 docker run --rm -v $PWD:/tmp ghcr.io/degauss-org/st_census_tract:0.2.1 my_address_file_geocoded.csv
