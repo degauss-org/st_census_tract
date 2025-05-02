@@ -2,7 +2,7 @@ FROM rocker/r-ver:4.0.5
 
 # DeGAUSS container metadata
 ENV degauss_name="st_census_tract"
-ENV degauss_version="0.2.1"
+ENV degauss_version="0.2.2"
 ENV degauss_description="census tract identifiers with appropriate vintage"
 # ENV degauss_argument="short description of optional argument [default: 'insert_default_value_here']"
 
@@ -30,7 +30,7 @@ COPY renv.lock .
 
 RUN R --quiet -e "renv::restore(repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
 
-ADD https://geomarker.s3.us-east-2.amazonaws.com/geometries/census_tracts_1970_to_2020_valid.rds census_tracts_1970_to_2020_valid.rds
+ADD https://github.com/degauss-org/st_census_tract/releases/download/0.2.1/census_tracts_1970_to_2020_valid.rds census_tracts_1970_to_2020_valid.rds
 COPY entrypoint.R .
 
 WORKDIR /tmp
