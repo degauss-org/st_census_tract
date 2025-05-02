@@ -8,10 +8,10 @@
 If `my_address_file_geocoded.csv` is a file in the current working directory with coordinate columns named `lat`, `lon`, `start_date`, and `end_date`, then the [DeGAUSS command](https://degauss.org/using_degauss.html#DeGAUSS_Commands):
 
 ```sh
-docker run --rm -v $PWD:/tmp ghcr.io/degauss-org/st_census_tract:0.2.1 my_address_file_geocoded.csv
+docker run --rm -v $PWD:/tmp ghcr.io/degauss-org/st_census_tract:0.2.2 my_address_file_geocoded.csv
 ```
 
-will produce `my_address_file_geocoded_st_census_tract_0.2.1.csv` with added columns:
+will produce `my_address_file_geocoded_st_census_tract_0.2.2.csv` with added columns:
 
 - **`census_tract_vintage`**: decennial census year 
 - **`census_tract_id`**: census tract FIPS identifier 
@@ -42,8 +42,7 @@ where a 2010 tract identifier is assigned to the first row, and a 2020 tract ide
 ## Geomarker Data
 
 - census tract boundaries were obtained from [NHGIS](https://www.nhgis.org/) and transformed to crs 5072
-- census tract boundaries used in this container are stored at [`s3://geomarker/geometries/census_tracts_1970_to_2020_valid.rds`](https://geomarker.s3.us-east-2.amazonaws.com/geometries/census_tracts_1970_to_2020_valid.rds)
-
+- census tract boundaries used in this container are stored as a versioned GitHub release asset
 ## DeGAUSS Details
 
 For detailed documentation on DeGAUSS, including general usage and installation, please see the [DeGAUSS homepage](https://degauss.org).
