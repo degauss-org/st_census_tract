@@ -31,7 +31,7 @@ RUN apt-get update \
 
 COPY renv.lock .
 
-RUN R --quiet -e "renv::restore(repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
+RUN R --quiet -e "renv::restore(repos = c(CRAN = sprintf('https://p3m.dev/cran/latest/bin/linux/manylinux_2_28-%s/%s', R.version['arch'], substr(getRversion(), 1, 3))))"
 
 ADD https://github.com/degauss-org/st_census_tract/releases/download/0.2.1/census_tracts_1970_to_2020_valid.rds census_tracts_1970_to_2020_valid.rds
 COPY entrypoint.R .
