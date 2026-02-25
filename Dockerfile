@@ -24,6 +24,9 @@ RUN apt-get update \
     libgeos-dev \
     libudunits2-dev \
     libproj-dev \
+    libfontconfig1-dev \
+    libharfbuzz-dev \
+    libfribidi-dev \
     && apt-get clean
 
 COPY renv.lock .
