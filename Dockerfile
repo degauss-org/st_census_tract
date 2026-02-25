@@ -1,8 +1,8 @@
-FROM rocker/r-ver:4.0.5
+FROM rocker/r-ver:4.4
 
 # DeGAUSS container metadata
 ENV degauss_name="st_census_tract"
-ENV degauss_version="0.2.2"
+ENV degauss_version="0.2.3"
 ENV degauss_description="census tract identifiers with appropriate vintage"
 # ENV degauss_argument="short description of optional argument [default: 'insert_default_value_here']"
 
@@ -24,11 +24,14 @@ RUN apt-get update \
     libgeos-dev \
     libudunits2-dev \
     libproj-dev \
+    libfontconfig1-dev \
+    libharfbuzz-dev \
+    libfribidi-dev \
     && apt-get clean
 
 COPY renv.lock .
 
-RUN R --quiet -e "renv::restore(repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
+RUN R --quiet -e "renv::restore(repos = c(CRAN = sprintf('https://p3m.dev/cran/latest/bin/linux/manylinux_2_28-%s/%s', R.version['arch'], substr(getRversion(), 1, 3))))"
 
 ADD https://github.com/degauss-org/st_census_tract/releases/download/0.2.1/census_tracts_1970_to_2020_valid.rds census_tracts_1970_to_2020_valid.rds
 COPY entrypoint.R .
